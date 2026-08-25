@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja Online</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #5d6875;
+      --paper: #fffaf0;
+      --accent: #e84855;
+      --accent-2: #00a6a6;
+      --gold: #ffbf3f;
+      --shadow: 0 24px 70px rgba(23, 33, 43, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 14% 16%, rgba(255, 191, 63, 0.46), transparent 26%),
+        radial-gradient(circle at 85% 12%, rgba(0, 166, 166, 0.32), transparent 25%),
+        linear-gradient(135deg, #fff7d6 0%, #f3fbff 48%, #ffe5e9 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(30deg, rgba(23, 33, 43, 0.12) 12%, transparent 12.5%, transparent 87%, rgba(23, 33, 43, 0.12) 87.5%, rgba(23, 33, 43, 0.12)),
+        linear-gradient(150deg, rgba(23, 33, 43, 0.12) 12%, transparent 12.5%, transparent 87%, rgba(23, 33, 43, 0.12) 87.5%, rgba(23, 33, 43, 0.12));
+      background-position: 0 0, 18px 18px;
+      background-size: 36px 36px;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      padding: 28px;
+    }
+
+    .card {
+      width: min(760px, 100%);
+      padding: clamp(28px, 7vw, 64px);
+      border: 3px solid rgba(23, 33, 43, 0.92);
+      border-radius: 8px;
+      background: rgba(255, 250, 240, 0.9);
+      box-shadow: var(--shadow);
+      text-align: center;
+      backdrop-filter: blur(12px);
+      transform: rotate(-1deg);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--gold);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    h1 {
+      margin: 28px 0 12px;
+      font-size: clamp(2.3rem, 8vw, 5.7rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+    }
+
+    p {
+      max-width: 520px;
+      margin: 0 auto 26px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.4vw, 1.22rem);
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      color: var(--ink);
+      background: white;
+      box-shadow: 5px 5px 0 var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    a:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .sale-sign {
+      position: fixed;
+      top: 28px;
+      right: 28px;
+      z-index: 3;
+      padding: 14px 18px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      font-weight: 900;
+      box-shadow: 6px 6px 0 var(--ink);
+      transform: rotate(5deg);
+    }
+
+    .professor-walk {
+      position: fixed;
+      left: 0;
+      bottom: 18px;
+      z-index: 4;
+      width: clamp(92px, 15vw, 170px);
+      height: clamp(92px, 15vw, 170px);
+      animation: walk 10s linear infinite;
+      will-change: transform;
+    }
+
+    .professor-walk img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 4px solid white;
+      border-radius: 50%;
+      box-shadow: 0 12px 28px rgba(23, 33, 43, 0.35);
+      animation: bob 540ms ease-in-out infinite alternate;
+    }
+
+    .professor-walk::after {
+      content: "fiscal da loja";
+      position: absolute;
+      left: 50%;
+      bottom: -12px;
+      min-width: max-content;
+      padding: 6px 10px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--accent-2);
+      color: white;
+      font-size: 0.76rem;
+      font-weight: 800;
+      transform: translateX(-50%) rotate(-3deg);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    @keyframes walk {
+      0% {
+        transform: translateX(-190px) scaleX(1) rotate(-2deg);
+      }
+      49% {
+        transform: translateX(calc(100vw + 20px)) scaleX(1) rotate(2deg);
+      }
+      50% {
+        transform: translateX(calc(100vw + 20px)) scaleX(-1) rotate(2deg);
+      }
+      99% {
+        transform: translateX(-190px) scaleX(-1) rotate(-2deg);
+      }
+      100% {
+        transform: translateX(-190px) scaleX(1) rotate(-2deg);
+      }
+    }
+
+    @keyframes bob {
+      from {
+        transform: translateY(0) rotate(-2deg);
+      }
+      to {
+        transform: translateY(-14px) rotate(3deg);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      main {
+        align-items: start;
+        padding-top: 92px;
+        padding-bottom: 180px;
+      }
+
+      .sale-sign {
+        top: 16px;
+        right: 16px;
+        font-size: 0.82rem;
+      }
+
+      .card {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sale-sign">BUGOU? COMPRA!</div>
+
+  <main>
+    <section class="card" aria-labelledby="titulo">
+      <span class="badge">Vitrine oficial</span>
+      <h1 id="titulo">Loja Online</h1>
+      <p>Frontend servido pelo nginx, agora com supervisão do super Fábio.</p>
+      <div class="actions">
+        <a href="/api/">Testar API</a>
+        <!-- <a href="professor.png">Ver professor</a> -->
+      </div>
+    </section>
+  </main>
+
+  <div class="professor-walk" aria-hidden="true">
+    <img src="professor.png" alt="">
+  </div>
+</body>
+</html>

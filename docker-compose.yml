@@ -1,0 +1,49 @@
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"          # Frontend publico
+    volumes:
+      - ./web/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./web/html:/usr/share/nginx/html:ro
+    networks:
+      - interna
+    depends_on:
+      - api
+
+  api:
+    image: traefik/whoami
+    # Sem porta publicada: acessivel apenas pela rede interna e pelo proxy /api/
+    networks:
+      - interna
+
+  banco:
+    image: redis:alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - dados-banco:/data
+    # Sem porta publicada: banco privado
+    networks:
+      - interna
+
+  objetos:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin12345
+    ports:
+      - "9001:9001"        # Console administrativo do MinIO
+    volumes:
+      - dados-objetos:/data
+    # A API S3 do MinIO fica interna na porta 9000, sem publicacao no host
+    networks:
+      - interna
+
+networks:
+  interna:
+    driver: bridge
+
+volumes:
+  dados-banco:
+  dados-objetos:

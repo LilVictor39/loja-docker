@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+*.log
+
+# Arquivos locais de ambiente
+.env
+.env.*
+
+# Saidas temporarias
+tmp/
+temp/
