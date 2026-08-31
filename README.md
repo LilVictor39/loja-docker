@@ -4,7 +4,7 @@
 
 *Isolando frontend, API, banco de dados e armazenamento de objetos — só o frontend vai para a "rua".*
 
-**Aluno:** Victor da Mata Abreu · CEULP/ULBRA
+**Aluno:** Victor da Mata Abreu | Gabriel Lopoes· CEULP/ULBRA
 
 ---
 
